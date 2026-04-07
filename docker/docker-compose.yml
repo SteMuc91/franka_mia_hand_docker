@@ -1,0 +1,33 @@
+services:
+  franka_mia_hand_ros2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - USER_UID=${USER_UID}
+        - USER_GID=${USER_GID}
+    container_name: franka_mia_hand_ros2
+    network_mode: "host"
+    device_cgroup_rules:
+      - "c 188:* rmw"
+    privileged: true
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../:/ros2_ws/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../limits.conf:/etc/security/limits.conf
+      - /dev:/dev
+    entrypoint: /franka_mia_hand_entrypoint.sh
+    environment:
+      PYTHONPATH: "/opt/ros/jazzy/lib/python3.12/site-packages"
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: $DISPLAY
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 99
+      rttime: -1
+      memlock: 8428281856
+    command: "/bin/bash" 
+

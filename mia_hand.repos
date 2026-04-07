@@ -1,0 +1,5 @@
+repositories:
+  mia_hand_ros2_pkgs:
+    type: git
+    url: https://bitbucket.org/prensilia-ros/mia_hand_ros2_pkgs.git
+    version: behaviour_tree

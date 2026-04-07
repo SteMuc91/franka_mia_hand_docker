@@ -1,0 +1,5 @@
+repositories:
+  manymove:
+    type: git
+    url: https://github.com/SteMuc91/manymove.git
+    version: main
