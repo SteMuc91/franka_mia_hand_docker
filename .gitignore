@@ -1,0 +1,2 @@
+## Ignore source folder containing GitHub repo (manymove, mia_hand_ros2_pkgs, franka_ros2)
+source/

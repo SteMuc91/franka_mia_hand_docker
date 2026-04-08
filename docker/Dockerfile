@@ -151,7 +151,7 @@ RUN echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> /home/$USERNAME/.bash
 WORKDIR /ros2_ws
 
 # Install the missing ROS 2 dependencies
-COPY . /ros2_ws/src
+COPY ../deps /ros2_ws/src
 
 RUN sudo chown -R $USERNAME:$USERNAME /ros2_ws \
     && vcs import src < src/dependency.repos --recursive --skip-existing \

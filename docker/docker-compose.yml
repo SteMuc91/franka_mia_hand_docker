@@ -14,9 +14,10 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ../:/ros2_ws/src
+      - ../source:/ros2_ws/src
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - ../limits.conf:/etc/security/limits.conf
+      - ../deps:/ros2_ws/deps
+      - ../deps/limits.conf:/etc/security/limits.conf
       - /dev:/dev
     entrypoint: /franka_mia_hand_entrypoint.sh
     environment:
@@ -29,5 +30,14 @@ services:
       rtprio: 99
       rttime: -1
       memlock: 8428281856
-    command: "/bin/bash" 
+    command:  >
+      bash -c "
+        cd /ros2_ws &&
+        # colcon build --symlink-install;
+        /bin/bash
+      "
+
+
+
+
 

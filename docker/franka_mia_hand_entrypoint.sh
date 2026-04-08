@@ -2,19 +2,21 @@
 
 # for use in debug mode: 
 set -ex
-## Import dependency and mia hand repo
-vcs import /ros2_ws/src < /ros2_ws/src/dependency.repos --recursive --skip-existing
-vcs import /ros2_ws/src < /ros2_ws/src/mia_hand.repos --recursive --skip-existing
-vcs import /ros2_ws/src  < /ros2_ws/src/manymove.repos --recursive --skip-existing \
+cd /ros2_ws
+## Import mia hand and many move repo.
+vcs import /ros2_ws/src < /ros2_ws/deps/mia_hand.repos --recursive --skip-existing
+vcs import /ros2_ws/src  < /ros2_ws/deps/manymove.repos --recursive --skip-existing 
 
 #
 cd /ros2_ws
 if [ ! -d "/ros2_ws/src/franka_ros2_repo" ]; then
     mkdir -p src/franka_ros2_repo
 fi
+# Import franka_ros2 and franka ros2 dependency repo.
+vcs import /ros2_ws/src/franka_ros2_repo < /ros2_ws/deps/dependency.repos --recursive --skip-existing
 cd src
-vcs import franka_ros2_repo < franka_ros2.repos --recursive --skip-existing
-##
+vcs import franka_ros2_repo < /ros2_ws/deps/franka_ros2.repos --recursive --skip-existing
+## 
 cd /ros2_ws
 source /opt/ros/jazzy/setup.bash
 sudo apt-get update
